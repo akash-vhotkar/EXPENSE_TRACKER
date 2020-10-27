@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login form</title>
+</head>
+<style>
+    body {
+
+        padding: 200px;
+        padding-left: 550px;
+        padding-right: 550px;
+        background-color: skyblue;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        color: #e7e7e7;
+
+    }
+
+    .login {
+
+        width: 450px;
+        height: 80%;
+        position: absolute;
+        text-align: center;
+        top: 30%;
+        left: 40%;
+        background-color: black;
+        opacity: 0.8;
+        margin: -184px 0px 0px -155px;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3), inset 0px 1px 0px rgba(255, 255, 255, 0.07)
+    }
+
+    h1 {
+        color: white;
+    }
+
+    label {
+        text-align: center;
+        display: grid;
+    }
+
+    input {
+        width: 300px;
+        height: 40px;
+
+    }
+
+    input[type="submit"] {
+        background: #3399ff;
+        border: 0;
+        width: 310px;
+        height: 40px;
+        border-radius: 3px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.4s linear;
+    }
+
+    h1 {
+        padding-left: 30px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: lightskyblue;
+        color: blue;
+    }
+
+    p {
+        color: white;
+    }
+</style>
+
+<body>
+    <div class="login">
+        <form action="/users/register" method="POST">
+            <h1>REGISTER FORMS</h1>
+            <%- include ('partials/messages') %>
+            <label>ENTER YOUR NAME </label><br> <input type="text" name="name" placeholder="ENTER YOUR NAME"
+                required><br><br>
+            <label>ENTER YOUR EMAIL </label><br></a><input type="email" name="email" id="password"
+                placeholder="ENTEr YOUR EMAIL ID" required><br><br>
+            <label>ENTER PASSWORLD </label><br><input type="password" name="password1"
+                placeholder="ENTER YOUR PASSWORLD" required><br><br>
+
+            <label>ENTER CONFIRM PASSWORLD </label><br>
+            <input type="password" name="password2" placeholder="ENTER CONFIRM PASSWORLD" required>
+            <br><br>
+            <input type="submit"><br>
+
+
+            <p><a href="/users/login"> LOGIN</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

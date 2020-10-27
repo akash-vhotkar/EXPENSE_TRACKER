@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<style>
+    .alert {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        padding: 20px;
+        background-color: rgb(90, 84, 84);
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+</style>
+
+<body>
+
+    <% if(typeof errors !='undefined'){ %>
+    <ul onclick="de()" id="btn">
+        <% errors.forEach(i=>{ %>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong> <%= i.msg %></strong>
+        </div>
+        <%}); %>
+    </ul>
+    <% } %>
+
+</body>
+
+</html>

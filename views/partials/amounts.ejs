@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>expensetracter</title>
+    <script src="https://kit.fontawesome.com/5c174d451e.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+
+    h1 {
+        text-align: center;
+    }
+
+
+    .balance {
+        margin: auto;
+        text-align: center;
+    }
+
+    .container {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 400px;
+        height: 100%;
+        position: relative;
+        top: 50px;
+        left: 35%;
+        right: 400px;
+    }
+
+    .head {
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    .showcase {
+        display: flex;
+        margin: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-right: 2px black;
+
+    }
+
+    .history {
+        overflow: scroll;
+        height: 200px;
+    }
+
+    .income {
+        border-right: 3px solid black;
+        padding: 20px;
+        margin: auto;
+    }
+
+    .income h2 {
+        color: green;
+    }
+
+    .expense {
+        padding: 20px;
+        margin: auto;
+    }
+
+    .expense h2 {
+        color: red;
+
+    }
+
+    .form {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-top: 40px;
+        text-align: center;
+
+
+    }
+
+    form {
+        margin-left: 20px;
+    }
+
+    input {
+        padding: 10px;
+        width: 80%;
+    }
+
+    input[type="button"] {
+        text-align: center;
+        margin: 10px;
+        background-color: purple;
+        color: gold;
+    }
+
+    .stylediv {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        padding: 10px;
+        margin-top: 20px;
+        margin-left: 40px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+    }
+
+    .alert {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 10px;
+        font-size: 15px;
+        padding: 16px;
+        justify-content: space-between;
+        background-color: skyblue;
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 1px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+
+
+    .hisid {
+        display: none;
+    }
+</style>
+
+<body>
+
+
+    <h1 class="head">expense tracker</h1>
+    <div class="balance">
+        <h2>your balance</h2>
+        <h1>RS <span class="totalbalance"><%= t_am%>.00</span></h1>
+    </div>
+    <div class="showcase">
+        <div class="income">
+            <h1>income</h1>
+            <h2>RS <span class="totalincome"><%= t_in%>.00</span></h2>
+        </div>
+        <div class="expense">
+            <h1>expense</h1>
+            <h2>RS <span class="totalexpense"><%= t_ex%>.00</span></h2>
+        </div>
+    </div>
+    <h1>history</h1>
+    <hr>
+
+    <div class="history">
+        <% if(typeof t_msg !='undefined'){ %>
+        <ul onclick="de()" id="btn">
+            <% if(t_msg.length<=5){%>
+            <% t_msg.slice().reverse().forEach((i)=> { %>
+            <%if(i.history_amounts<0) {%>
+            <div class="alert" style="border-right: 5px solid red;">
+                <strong> <%= i.history_messages %></strong>
+                <strong><%= i.history_amounts %></strong>
+                <span class="closebtn" onclick="removediv(this)">&times;</span>
+                <span class="hisid">i._id</span>
+
+
+            </div>
+            <%}%>
+            <%if(i.history_amounts>0) {%>
+            <div class="alert" style="border-right: 5px solid green;">
+                <strong> <%= i.history_messages %></strong>
+                <strong><%= i.history_amounts %></strong>
+                <span class="closebtn" onclick="removediv(this)">&times;</span>
+                <span class="hisid">i._id</span>
+
+            </div>
+            <%}%>
+
+
+            <%}); %>
+            <% } %>
+            <% if(t_msg.length>5) {%>
+            <% t_msg.slice().reverse().forEach((i)=> { %>
+            <%if(i.history_amounts<0) {%>
+            <div class="alert" style="border-right: 5px solid red;">
+                <strong> <%= i.history_messages %></strong>
+                <strong><%= i.history_amounts %></strong>
+                <span class="closebtn" onclick="removediv(this)">&times;</span>
+                <span class="hisid">i._id</span>
+
+
+            </div>
+            <%}%>
+                    <%if(i.history_amounts>0) {%>
+            <div class="alert" style="border-right: 5px solid green;">
+                <strong> <%= i.history_messages %></strong>
+                <strong><%= i.history_amounts %></strong>
+                <span class="closebtn" onclick="removediv(this)">&times;</span>
+                <span class="hisid">i._id</span>
+            </div>
+            <%}%>
+           
+
+            <%}); %>
+
+            <%}%>
+
+        </ul>
+        <% } %>
+
+    </div>
+
+
+</body>
+<script>
+    var removeid = [];
+    function removediv(rej) {
+        console.log("working");
+        const ids = rej.parentElement;
+        console.log(ids);
+        // parentdiv.children[4];
+        // console.log(parentdiv.children[4]);
+
+        // removeid.push(ids);
+        // rej.parentElement.style.display = 'none';
+        // console.log(removeid);
+    }
+</script>
+
+
+</html>
