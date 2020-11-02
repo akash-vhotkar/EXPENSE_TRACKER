@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>expensetracter</title>
+    <title>expense tracter</title>
     <script src="https://kit.fontawesome.com/5c174d451e.js" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -12,6 +12,18 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+
+
+
+    }
+
+    body {
+        background-image: url('https://media.istockphoto.com/photos/vacation-travel-planning-concept-with-map-overhead-view-of-equipment-picture-id1153172006?b=1&k=6&m=1153172006&s=170667a&w=0&h=9chTQld8RagPy9FDlKVl5txd9BYC5K7YMaALY8ZrLXE=');
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+
+
     }
 
 
@@ -29,16 +41,29 @@
     .container {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         width: 400px;
-        height: 100%;
-        position: relative;
-        top: 50px;
-        left: 35%;
-        right: 30%;
+        height: 630px;
+        background-color: #574f7d;
+        position: absolute;
+        top: 23px;
+        left: 20%;
+
     }
 
     .head {
         text-align: center;
         padding-bottom: 30px;
+    }
+
+    .allinone {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #574f7d;
+        border-radius: 40px;
+        margin: auto;
+        opacity: 0.9;
+        display: flex;
+        width: 1000px;
+        height: 713px;
+
     }
 
     .showcase {
@@ -71,14 +96,14 @@
 
     .form {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin-top: 40px;
+        margin-top: 10px;
         text-align: center;
 
 
     }
 
     form {
-        margin-left: 20px;
+        margin-left: 6px;
     }
 
     input {
@@ -90,6 +115,15 @@
         text-align: center;
         margin: 10px;
         background-color: purple;
+        color: gold;
+    }
+
+    input[type="submit"] {
+        text-align: center;
+        margin: 10px;
+        background-color: purple;
+        border-radius: 15px;
+
         color: gold;
     }
 
@@ -107,28 +141,28 @@
 </style>
 
 <body>
-    <div class="container">
+    <div class="allinone">
+        <div class="container">
 
-        <%- include ('partials/amounts') %>
-        <div class="form">
-            <h1>add new transaction</h1>
+            <%- include ('partials/amounts') %>
+            <div class="form">
+                <h1>add new transaction</h1>
 
-            <form action="/users/tracker/<%=user_name%>/hisdata" method="POST">
-                <h2>description about the amount </h2>
-                <input type="text" name="desc" class="mytext">
-                <h2>amount</h2>
-                <p>(negative - expense , positive - income)</p>
-                <input type="number" name="amount" class="myamount">
-                <input type="submit" value="add transaction" class="btn">
-            </form>
-            <form action="/users/tracker/<%= user_name%>/savedata" method="POST">
-                <input type="submit" value="save transaction" class="btn">
-            </form>
-            <form action="/users/tracker/<%= user_name%>/logout" method="POST">
-                <input type="submit" value="logout" class="btn">
-            </form>
+                <form action="/users/tracker/<%=user_name%>/hisdata" method="POST">
+                    <h2>description about the amount </h2>
+                    <input type="text" name="desc" class="mytext">
+                    <h2>amount</h2>
+                    <p>(negative - expense , positive - income)</p>
+                    <input type="number" name="amount" class="myamount" required>
+                    <input type="submit" value="add transaction" class="btn" required>
+                </form>
+
+                <form action="/users/tracker/<%= user_name%>/logout" method="POST">
+                    <input type="submit" value="logout" class="btn">
+                </form>
+            </div>
+
         </div>
-
     </div>
 </body>
 

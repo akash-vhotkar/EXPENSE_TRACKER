@@ -4,54 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>expensetracter</title>
+    <title>expense tracter</title>
     <script src="https://kit.fontawesome.com/5c174d451e.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    .mainhistory {
+        position: absolute;
+        background-color: #574f7d;
+        top: 3px;
+        left: 430px;
+        width: 500px;
+        height: 596px;
     }
 
-
-
-    h1 {
-        text-align: center;
-    }
-
-
-    .balance {
-        margin: auto;
-        text-align: center;
-    }
-
-    .container {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        width: 400px;
-        height: 100%;
-        position: relative;
-        top: 50px;
-        left: 35%;
-        right: 400px;
-    }
-
-    .head {
-        text-align: center;
-        padding-bottom: 30px;
-    }
-
-    .showcase {
-        display: flex;
-        margin: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-right: 2px black;
-
-    }
-
-    .history {
+    .alldata {
+        position: absolute;
+        background-color: #574f7d;
+        top: 48px;
+        left: 0px;
         overflow: scroll;
-        height: 200px;
+        width: 500px;
+        height: 596px;
     }
 
     .income {
@@ -61,7 +34,7 @@
     }
 
     .income h2 {
-        color: green;
+        color: gold;
     }
 
     .expense {
@@ -76,7 +49,7 @@
 
     .form {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin-top: 40px;
+        margin-top: 23px;
         text-align: center;
 
 
@@ -94,6 +67,7 @@
     input[type="button"] {
         text-align: center;
         margin: 10px;
+        border: 0px;
         background-color: purple;
         color: gold;
     }
@@ -114,8 +88,10 @@
         font-family: Arial, Helvetica, sans-serif;
         margin: 10px;
         font-size: 15px;
+        border: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         padding: 16px;
-        justify-content: space-between;
+        justify-content: space-around;
         background-color: skyblue;
         color: white;
     }
@@ -133,15 +109,96 @@
 
     .closebtn:hover {
         color: black;
+
     }
+
+    .nmhead {
+        position: fixed;
+        align-items: center;
+        margin: auto;
+        padding-left: 60px;
+        background-color: #4f3a65;
+
+    }
+
+    .allhistory {
+        padding: 10px;
+        padding-left: 40px;
+        padding-right: 40px;
+        background-color: #574f7d;
+    }
+
+    .allhistory:hover {
+        background-color: #4f3a65;
+    }
+
+    .allincome:hover {
+        background-color: #4f3a65;
+    }
+
+    .allexpenses:hover {
+        background-color: #4f3a65;
+    }
+
+    .allincome {
+        padding: 10px;
+        padding-left: 40px;
+        padding-right: 40px;
+        background-color: #574f7d;
+    }
+
+    .allexpenses {
+        padding: 10px;
+        padding-left: 40px;
+        padding-right: 33px;
+        background-color: #574f7d;
+    }
+
+    .onclick-tabs {
+        display: flex;
+        position: fixed;
+        justify-content: space-between;
+    }
+
+    .historydata {
+        display: block;
+        background-color: #4f3a65;
+    }
+
+    .incomedata {
+        display: none;
+        background-color: #4f3a65;
+
+    }
+
+    .expensedata {
+        display: none;
+        background-color: #4f3a65;
+    }
+
+
+
+
 
 
     .hisid {
         display: none;
+
+    }
+
+    .sighn {
+        padding-left: 300px;
+    }
+
+    #amt {
+        padding-left: 7px;
     }
 </style>
 
 <body>
+
+
+    <h1>Welcome<span id="username"> <%=user_name%></span></h1>
 
 
     <h1 class="head">expense tracker</h1>
@@ -159,82 +216,202 @@
             <h2>RS <span class="totalexpense"><%= t_ex%>.00</span></h2>
         </div>
     </div>
-    <h1>history</h1>
-    <hr>
-
-    <div class="history">
-        <% if(typeof t_msg !='undefined'){ %>
-        <ul onclick="de()" id="btn">
-            <% if(t_msg.length<=5){%>
-            <% t_msg.slice().reverse().forEach((i)=> { %>
-            <%if(i.history_amounts<0) {%>
-            <div class="alert" style="border-right: 5px solid red;">
-                <strong> <%= i.history_messages %></strong>
-                <strong><%= i.history_amounts %></strong>
-                <span class="closebtn" onclick="removediv(this)">&times;</span>
-                <span class="hisid">i._id</span>
 
 
+    <div class="mainhistory">
+
+        <section class="onclick-tabs">
+            <div class="allhistory" onclick="a()">
+                <h1>all history</h1>
             </div>
-            <%}%>
+
+            <div class="allincome" onclick="b()">
+                <h1>income</h1>
+            </div>
+            <div class="allexpenses" onclick="c()">
+                <h1>expenses</h1>
+            </div>
+        </section>
+
+
+
+
+
+
+        <div class="alldata">
+            <div class="historydata">
+
+
+                <% if(typeof t_msg !='undefined'){ %>
+                <ul id="btn">
+
+                    <% t_msg.slice().reverse().forEach((i)=> { %>
+                    <%if(i.history_amounts<0) {%>
+                    <div class="alert" style="border-right: 10px solid red;">
+                        <strong> <%= i.history_messages %></strong>
+                        <span class="sighn">RS</span><strong id="amt"><%= i.history_amounts %></strong>
+                        <span class="closebtn" onclick="removediv(this)">&times;</span>
+                        <span class="hisid"><%= i._id%></span>
+
+
+                    </div>
+                    <%}%>
             <%if(i.history_amounts>0) {%>
-            <div class="alert" style="border-right: 5px solid green;">
-                <strong> <%= i.history_messages %></strong>
-                <strong><%= i.history_amounts %></strong>
-                <span class="closebtn" onclick="removediv(this)">&times;</span>
-                <span class="hisid">i._id</span>
+                    <div class="alert" style="border-right: 10px solid gold;">
+                        <strong> <%= i.history_messages %></strong>
+                        <span class="sighn">Rs</span><strong id="amt"><%= i.history_amounts %></strong>
+                        <span class="closebtn" onclick="removediv(this)">&times;</span>
+                        <span class="hisid"><%= i._id%></span>
 
-            </div>
-            <%}%>
+                    </div>
+                    <%}%>
 
 
             <%}); %>
-            <% } %>
-            <% if(t_msg.length>5) {%>
-            <% t_msg.slice().reverse().forEach((i)=> { %>
-            <%if(i.history_amounts<0) {%>
-            <div class="alert" style="border-right: 5px solid red;">
-                <strong> <%= i.history_messages %></strong>
-                <strong><%= i.history_amounts %></strong>
-                <span class="closebtn" onclick="removediv(this)">&times;</span>
-                <span class="hisid">i._id</span>
 
+
+                </ul>
+                <% } %>
 
             </div>
-            <%}%>
+
+            <div class="incomedata">
+                <% if(typeof t_msg !='undefined'){ %>
+                <ul id="btn">
+
+                    <% t_msg.slice().reverse().forEach((i)=> { %>
+
                     <%if(i.history_amounts>0) {%>
-            <div class="alert" style="border-right: 5px solid green;">
-                <strong> <%= i.history_messages %></strong>
-                <strong><%= i.history_amounts %></strong>
-                <span class="closebtn" onclick="removediv(this)">&times;</span>
-                <span class="hisid">i._id</span>
-            </div>
-            <%}%>
-           
+                    <div class="alert" style="border-right: 10px solid gold;">
+                        <strong> <%= i.history_messages %></strong>
+                        <span class="sighn">Rs</span><strong id="amt"><%= i.history_amounts %></strong>
+                        <span class="closebtn" onclick="removediv(this)">&times;</span>
+                        <span class="hisid"><%= i._id%></span>
+
+                    </div>
+                    <%}%>
+
 
             <%}); %>
 
-            <%}%>
+                    <% } %>
+                </ul>
 
-        </ul>
-        <% } %>
+            </div>
+            <div class="expensedata">
+                <% if(typeof t_msg !='undefined'){ %>
+                <ul id="btn">
 
+                    <% t_msg.slice().reverse().forEach((i)=> { %>
+
+                    <%if(i.history_amounts<0) {%>
+                    <div class="alert" style="border-right: 10px solid red;">
+                        <strong> <%= i.history_messages %></strong>
+                        <span class="sighn">Rs</span><strong id="amt"><%= i.history_amounts %></strong>
+                        <span class="closebtn" onclick="removediv(this)">&times;</span>
+                        <span class="hisid"><%= i._id%></span>
+
+                    </div>
+                    <%}%>
+
+
+            <%}); %>
+
+                    <% } %>
+                </ul>
+
+            </div>
+        </div>
     </div>
 
 
 </body>
 <script>
-    var removeid = [];
-    function removediv(rej) {
-        console.log("working");
-        const ids = rej.parentElement;
-        console.log(ids);
-        // parentdiv.children[4];
-        // console.log(parentdiv.children[4]);
 
-        // removeid.push(ids);
-        // rej.parentElement.style.display = 'none';
-        // console.log(removeid);
+
+
+
+
+
+
+
+
+    function a() {
+
+        document.querySelector('.allhistory').style.background = "#4f3a65";
+        document.querySelector('.allincome').style.background = "#574f7d";
+        document.querySelector('.allexpenses').style.background = "#574f7d";
+
+        document.querySelector('.historydata').style.display = "block"
+        document.querySelector('.incomedata').style.display = "none"
+        document.querySelector('.expensedata').style.display = "none"
+
+    }
+
+    function b() {
+        document.querySelector('.allincome').style.background = "#4f3a65";
+        document.querySelector('.allhistory').style.background = "#574f7d";
+        document.querySelector('.allexpenses').style.background = "#574f7d";
+        document.querySelector('.historydata').style.display = "none"
+        document.querySelector('.incomedata').style.display = "block"
+        document.querySelector('.expensedata').style.display = "none"
+
+    }
+
+    function c() {
+        document.querySelector('.allexpenses').style.background = "#4f3a65";
+        document.querySelector('.allhistory').style.background = "#574f7d";
+        document.querySelector('.allincome').style.background = "#574f7d";
+        document.querySelector('.historydata').style.display = "none"
+        document.querySelector('.incomedata').style.display = "none"
+        document.querySelector('.expensedata').style.display = "block"
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function removediv(rej) {
+        var name = document.querySelector('#username').innerHTML;
+
+        let id = rej.parentElement.children[3].textContent;
+        let delelteamount = rej.parentElement.children[2].textContent;
+        let totalbalance = document.querySelector('.totalbalance').textContent;
+        let totalincome = document.querySelector('.totalincome').textContent;
+        let totalexpense = document.querySelector('.totalexpense').textContent;
+        document.querySelector('.totalbalance').innerHTML = totalbalance - parseInt(delelteamount);
+
+
+        if (delelteamount < 0) {
+            document.querySelector('.totalexpense').innerHTML = Math.abs(totalexpense) - Math.abs(delelteamount);
+        }
+        else {
+            document.querySelector('.totalincome').innerHTML = totalincome - parseInt(delelteamount);
+        }
+
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("running");
+            }
+        };
+        xhttp.open("GET", "/deletedata?id=" + id + "&username=" + name, true);
+        xhttp.send();
+
+        rej.parentElement.remove();
+
+
+
     }
 </script>
 

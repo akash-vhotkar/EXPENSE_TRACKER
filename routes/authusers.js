@@ -26,11 +26,17 @@ router.post('/login', (req, res) => {
         res.render('login', { logerrorm })
     }
     else {
-        User.findOne({ email: username })
+        console.log(username);
+        User.findOne({ name: username })
             .then((user) => {
+
                 bcypt.compare(passworld, user.password2, (err, ismatch) => {
                     if (err) console.log(err);
-                    else res.render('main', { user_name: user.email, t_am: user.totalamount, t_in: user.income, t_ex: user.expense, t_msg: user.messages })
+                    else {
+                        req.session.name = user.name;
+                        res.redirect("/users/tracker/" + user.name);
+
+                    }
                 })
             })
             .catch((err) => {
@@ -76,10 +82,12 @@ router.post('/register', (req, res) => {
     }
     else {
         //validate user
+        console.log(data.name);
 
-        User.findOne({ email: data.email })
+        User.findOne({ name: data.name })
             .then((user) => {
                 if (user) {
+                    console.log(user);
                     errors.push({ msg: "user already exists" })
                     res.render('register', { errors })
                 }
@@ -91,9 +99,10 @@ router.post('/register', (req, res) => {
                             data.password2 = hash;
                             User.create(data)
                                 .then(() => {
-                                    console.log("data was inserted");
-                                    errors.push({ msg: "registeration succefully " })
-                                    res.render('login', { errors: errors });
+
+                                    // errors.push({ msg: "registeration succefully " })
+                                    req.session.name = data.name;
+                                    res.redirect("/users/tracker/" + data.name);
                                 })
                                 .catch(() => {
                                     console.log("data was not inserted");
@@ -102,8 +111,12 @@ router.post('/register', (req, res) => {
                     })
 
                 }
+
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+
+            })
 
 
     }
