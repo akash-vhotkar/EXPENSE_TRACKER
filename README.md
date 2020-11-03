@@ -1,16 +1,18 @@
 # expense tracker
 > ## about the project 
 
-* thise project was  designe to track day  to day basis income amounts like salary ,cashbacks ets and expenses 
-which we are giving the money for purshasing grocery and 
-other stuf
+* thise project was  designe to track day to day basis income amounts like salary ,cashbacks ets and expenses 
+which we are spended  money for purshasing grocery and other products
 
 * advantages
     * tracking the money  with text 
     * tracking monthly budget of users
-    *  help to know  whether the monthly budget are maintained of not 
+    *  help to know  whether the monthly budget are maintained or not 
 
-
+> ## technical features of the project 
+   * project was autheticated by using session pakage npm
+   * all data are stored inside the mongodb atlas
+   * all history ,income ,expense data are separted by using partials
 
 
 
